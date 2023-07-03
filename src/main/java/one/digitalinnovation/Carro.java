@@ -2,11 +2,11 @@ package one.digitalinnovation;
 
 import java.util.Objects;
 
-public class Carro {
+public class Carro implements Comparable<Carro>{
 
-    String marca;
+    private String marca;
 
-    public Carro(String marca) {
+    public Carro(String marca){
         this.marca = marca;
     }
 
@@ -21,14 +21,14 @@ public class Carro {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Carro)) return false;
         Carro carro = (Carro) o;
-        return Objects.equals(marca, carro.marca);
+        return Objects.equals(getMarca(), carro.getMarca());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(marca);
+        return Objects.hash(getMarca());
     }
 
     @Override
@@ -36,5 +36,22 @@ public class Carro {
         return "Carro{" +
                 "marca='" + marca + '\'' +
                 '}';
+    }
+//Por ordem de tamanhao
+    //ficou no caso tamanho de nome da marca
+//    @Override
+//    public int compareTo(Carro o) {
+//        if(this.marca.length() < o.getMarca().length()){
+//            return -1;
+//        }else if(this.marca.length() > o.getMarca().length()){
+//            return 1;
+//        }
+//        return 0;
+//    }
+
+    //Comporação por ordem alfabetica
+    @Override
+    public int compareTo(Carro o) {
+        return this.getMarca().compareTo(o.getMarca());
     }
 }
